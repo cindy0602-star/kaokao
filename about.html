@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高鑫車業 | 關於我們</title>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Helvetica Neue", Arial, sans-serif; }
+        
+        /* 網頁主體：加入高質感的深海藍微漸層背景，消除單色的死板感 */
+        body { background: linear-gradient(135deg, #182A45 0%, #203B5F 50%, #132238 100%); color: #F5F2EB; line-height: 1.8; padding-top: 80px; min-height: 100vh; }
+        
+        .navbar { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background-color: rgba(43, 47, 51, 0.95); z-index: 1000; border-bottom: 1px solid #1B3F43; }
+        .logo { font-size: 24px; font-weight: bold; color: #F5F2EB; text-decoration: none; letter-spacing: 2px; }
+        .menu { display: flex; gap: 30px; }
+        .menu a { color: #F5F2EB; text-decoration: none; font-size: 15px; transition: color 0.3s; letter-spacing: 1px; }
+        .menu a:hover, .menu a.active { color: #DDE8EB; border-bottom: 1px solid #DDE8EB; padding-bottom: 5px; }
+        .menu-checkbox { display: none; }
+        .hamburger-icon { display: none; color: #F5F2EB; font-size: 28px; cursor: pointer; }
+
+        .about-container { max-width: 800px; margin: 60px auto; padding: 0 20px; }
+        .about-title { color: #DDE8EB; font-size: 32px; letter-spacing: 5px; margin-bottom: 50px; font-weight: normal; text-align: center; }
+        
+        /* 每個大段落的容器 */
+        .section-block { margin-bottom: 60px; }
+        
+        /* 標題樣式 (加上深青綠色左邊框點綴) */
+        .section-heading { font-size: 20px; color: #DDE8EB; border-left: 3px solid #1B3F43; padding-left: 15px; margin-bottom: 20px; letter-spacing: 2px; font-weight: normal; }
+        
+        /* 基本資料清單 */
+        .info-list { list-style: none; padding-left: 10px; }
+        .info-list li { margin-bottom: 15px; color: #F5F2EB; font-size: 15px; opacity: 0.9; display: flex; align-items: flex-start; }
+        .info-list li strong { color: #DDE8EB; min-width: 90px; font-weight: normal; margin-right: 15px; flex-shrink: 0; }
+
+        /* 文章段落文字 */
+        .article-text { color: #F5F2EB; font-size: 15px; line-height: 2; text-align: justify; opacity: 0.85; margin-bottom: 20px; }
+
+        /* 品牌理念引言卡片 (帶有透明感與微框線) */
+        .quote-card { background-color: rgba(43, 47, 51, 0.4); border: 1px solid #1B3F43; padding: 35px; border-radius: 4px; border-left: 4px solid #DDE8EB; }
+        .quote-card .article-text { margin-bottom: 15px; }
+        .quote-card .article-text:last-child { margin-bottom: 0; }
+
+        /* 聯絡資訊方塊：炭灰底色 */
+        .contact-box { background-color: #2B2F33; border: 1px solid #1B3F43; padding: 40px; border-radius: 4px; text-align: left; margin-bottom: 80px; }
+        
+        /* 標題左側加上 霧灰 裝飾線 */
+        .contact-title { color: #F5F2EB; font-size: 18px; margin-bottom: 25px; border-left: 3px solid #DDE8EB; padding-left: 15px; letter-spacing: 2px; font-weight: normal; }
+        .info-item { margin-bottom: 15px; color: #DDE8EB; font-size: 15px; }
+        .info-item strong { color: #F5F2EB; margin-right: 15px; display: inline-block; width: 80px; }
+
+        .floating-line { position: fixed; bottom: 30px; right: 30px; background-color: #1B3F43; color: #DDE8EB; padding: 12px 20px; border-radius: 50px; border: 1px solid #DDE8EB; text-decoration: none; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999; display: flex; align-items: center; transition: 0.3s; letter-spacing: 1px; }
+        .floating-line:hover { background-color: #DDE8EB; color: #203B5F; }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .hamburger-icon { display: block; }
+            .menu { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; width: 100%; background-color: #2B2F33; padding: 20px 0; border-top: 1px solid #1B3F43; }
+            .menu a { padding: 15px; text-align: center; border: none !important; }
+            .menu-checkbox:checked ~ .menu { display: flex; }
+            .contact-box { padding: 25px; }
+            .floating-line { bottom: 20px; right: 20px; font-size: 13px; padding: 10px 15px; }
+        }
+        /* --- 聯絡我們懸浮選單樣式 --- */
+.contact-menu {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 10px;
+    z-index: 999;
+}
+.contact-toggle {
+    display: none;
+}
+.contact-btn {
+    background-color: #1B3F43;
+    color: #F5F2EB;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+}
+.contact-btn:hover {
+    background-color: #DDE8EB;
+    color: #1B3F43;
+}
+.contact-item {
+    background-color: #203B5F;
+    color: #F5F2EB;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+.contact-item:hover {
+    background-color: #DDE8EB;
+    color: #203B5F;
+}
+.contact-toggle:checked ~ .contact-item {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">高鑫車業</a>
+        <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+        <label for="menu-toggle" class="hamburger-icon">☰</label>
+        <div class="menu">
+            <a href="index.html">首頁</a>
+            <a href="buy.html">嚴選買車</a>
+            <a href="sell.html">線上估車</a>
+            <a href="about.html" class="active">關於我們</a>
+        </div>
+    </nav>
+
+    <div class="about-container">
+        <h1 class="about-title">BRAND STORY</h1>
+
+        <!-- 01｜品牌基本資料 -->
+        <div class="section-block">
+            <h2 class="section-heading">01｜品牌基本資料</h2>
+            <ul class="info-list">
+                <li><strong>品牌名稱</strong>高鑫車業</li>
+                <li><strong>服務項目</strong>中古車買賣、選車顧問、購車相關服務。</li>
+                <li><strong>名稱意涵</strong>「高」代表對車況、服務與選車品質的要求；「鑫」象徵穩定、累積與長久經營。</li>
+                <li><strong>品牌印象</strong>專業、穩健、值得信任。</li>
+            </ul>
+        </div>
+
+        <!-- 02｜品牌故事 -->
+        <div class="section-block">
+            <h2 class="section-heading">02｜品牌故事：信任，從透明開始</h2>
+            <p class="article-text">買中古車，消費者最怕的往往不是「沒有車可以選」，而是看了很多資訊、聽了很多說法，最後仍然不知道：這台車到底值不值得買？眼前的人，又憑什麼值得相信？</p>
+            <p class="article-text">高鑫車業因此開始思考，真正能建立信任的，不應該只是「誠實、透明、專業」幾個字，而是讓客戶在做決定之前，能看見我們怎麼判斷、為什麼推薦。</p>
+            <p class="article-text">所以，我們先從人的需求開始。了解預算、用途、日常里程、家庭成員、空間需求與養車能力，再回到車本身，從車輛鑑定、實際里程、維修與事故資訊，到實際車況檢查結果逐一確認；遇到不同選擇，也把各自的優點、限制與取捨說清楚，而不是只把最好聽的一面留給客戶。</p>
+            <p class="article-text">因為高鑫相信，真正的專業不是一句「這台車很好」，而是能說清楚它好在哪裡、適合誰，又有哪些地方需要考慮。</p>
+            <p class="article-text">我們希望客戶選擇高鑫，不是因為聽見一句承諾，而是因為在整個過程裡，看見了足以讓自己做決定的理由。一筆交易會結束，但能被驗證的專業與信任，才有機會留下來。</p>
+        </div>
+
+        <!-- 03｜品牌理念 -->
+        <div class="section-block">
+            <h2 class="section-heading">03｜品牌理念</h2>
+            <div class="quote-card">
+                <p class="article-text">我們相信，真正的信任，不是來自一句承諾，而是來自每一個能被理解、被確認的過程。</p>
+                <p class="article-text">高鑫車業從客戶的實際需求出發，再回到車輛本身，透過車輛鑑定、里程、維修與事故資訊，以及實際車況檢查，逐一確認重要條件；面對不同選擇，也把優點、限制與取捨說清楚。</p>
+                <p class="article-text">我們不只希望完成一筆交易，更希望每一次推薦，都有值得相信的理由。</p>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <h2 class="contact-title">聯絡資訊</h2>
+            <div class="info-item"><strong>營業時間</strong>週一至週日 10:00 - 20:00</div>
+            <div class="info-item"><strong>服務專線</strong>02-1234-5678</div>
+            <div class="info-item"><strong>展示中心</strong>台北市內湖區新明路XXX號</div>
+            <div class="info-item"><strong>官方 LINE</strong>@gxmotors</div>
+        </div>
+    </div>
+
+   
+    <!-- 聯絡我們懸浮選單 -->
+<div class="contact-menu">
+    <input type="checkbox" id="contact-toggle" class="contact-toggle">
+    <label for="contact-toggle" class="contact-btn">💬 聯絡我們</label>
+    <a href="tel:0909361360" class="contact-item">📞 撥打電話</a>
+    <a href="https://lin.ee/Zubnbww" target="_blank" class="contact-item">💬 官方 LINE</a>
+</body>
+</html>
